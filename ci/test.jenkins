@@ -19,15 +19,15 @@ pipeline {
 		
 		rm -rf data_analytics_trigger_migrate_tenant-1.zip
                 zip data_analytics_trigger_migrate_tenant-1.zip test2.py
-		zip -ur data_analytics_RDS_snapshot-1.zip pgysog
+		zip -ur data_analytics_trigger_migrate_tenant-1.zip pgysog
 		
 		rm -rf data_analytics_migrate_tenant-1.zip
                 zip data_analytics_migrate_tenant-1.zip test3.py
-		zip -ur data_analytics_RDS_snapshot-1.zip pgysog
+		zip -ur data_analytics_migrate_tenant-1.zip pgysog
 		
 		rm -rf data_analytics_migrate_tenants-4.zip
                 zip data_analytics_migrate_tenants-1.zip test4.py
-		zip -ur data_analytics_RDS_snapshot-1.zip pgysog
+		zip -ur data_analytics_migrate_tenants-1.zip pgysog
 		
 						
                 '''
