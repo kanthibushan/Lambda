@@ -10,7 +10,7 @@ pipeline {
         stage ('ZipFileCreation'){
             steps{
                 sh '''
-                cd bin
+                cd data-analytics/bin
 		cp pgysog "${env.WORKSPACE}/data-analytics"
 		cd ..
 		cd lambda-functions
