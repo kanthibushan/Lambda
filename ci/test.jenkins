@@ -12,7 +12,7 @@ pipeline {
                 sh '''
                     cd data-analytics
 		    rm -rf data_analytics_RDS_snapshot.zip
-                    zip -r data_analytics_RDS_snapshot-1.zip . -i test.py
+                    zip data_analytics_RDS_snapshot-1.zip test.py
 		    zip -ur data_analytics_RDS_snapshot-1.zip pgysog
 					
 					
