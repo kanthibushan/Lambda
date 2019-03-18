@@ -15,7 +15,7 @@ pipeline {
                 zip data_analytics_RDS_snapshot-1.zip lambda-functions/test1.py
 		cd ..
 		cd bin
-		zip -ur data_analytics_RDS_snapshot-1.zip pgysog
+		zip -ur "${env.WORKSPACE}/data-analytics/data_analytics_RDS_snapshot-1.zip" pgysog
 		
 						
                 '''
