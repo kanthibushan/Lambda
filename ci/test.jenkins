@@ -10,12 +10,13 @@ pipeline {
         stage ('ZipFileCreation'){
             steps{
                 sh '''
-                cd data-analytics
-		rm -rf data_analytics_RDS_snapshot-1.zip
-                zip data_analytics_RDS_snapshot-1.zip lambda-functions/test1.py
+                cd bin
+		cp pgysog "${env.WORKSPACE}/data-analytics"
 		cd ..
-		cd bin
-		zip -ur "${env.WORKSPACE}/data-analytics/data_analytics_RDS_snapshot-1.zip" pgysog
+		cd lambda-functions
+		rm -rf data_analytics_RDS_snapshot-1.zip
+                zip data_analytics_RDS_snapshot-1.zip test1.py
+		zip -ur data_analytics_RDS_snapshot-1.zip pgysog
 		
 						
                 '''
