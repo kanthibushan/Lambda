@@ -11,8 +11,8 @@ pipeline {
             steps{
                 sh '''
                     cd data-analytics
-                    zip -r data_analytics_RDS_snapshot-1.zip .  -i test.py psgoypt
-		    zip -ur data_analytics_RDS_snapshot-1.zip .  -i psgoypt
+                    zip -r data_analytics_RDS_snapshot-1.zip test.py psgoypt
+		    zip -ur data_analytics_RDS_snapshot-1.zip psgoypt
 					
 					
                 '''
