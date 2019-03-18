@@ -2,7 +2,6 @@ pipeline {
     agent any
     parameters {
         string(defaultValue: 'bluesky-step-functions', description: 'S3Bucket Name', name: 'S3Bucket')
-		string(defaultValue: 'bluesky-step-functions/Step-Functions-Latest/', description: 'Folder Path', name: 'S3key')
         string(defaultValue: '/bluesky-step-functions/Lambda-Functions-Latest', description: 'Folder Path', name: 'S3key')
     }
 
