@@ -11,7 +11,7 @@ pipeline {
             steps{
                 sh '''
                 cd data-analytics/bin
-		cp pgysog "${env.WORKSPACE}/data-analytics"
+		cp pgysog ${env.WORKSPACE}/data-analytics
 		cd ..
 		cd lambda-functions
 		rm -rf data_analytics_RDS_snapshot-1.zip
