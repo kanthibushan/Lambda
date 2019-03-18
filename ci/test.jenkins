@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string(defaultValue: 'bluesky-step-functions', description: 'S3Bucket Name', name: 'S3Bucket')
-		string(defaultValue: '/bluesky-step-functions/Step-Functions-Latest', description: 'Folder Path', name: 'S3key')
+		string(defaultValue: 'bluesky-step-functions/Step-Functions-Latest/', description: 'Folder Path', name: 'S3key')
         string(defaultValue: '/bluesky-step-functions/Lambda-Functions-Latest', description: 'Folder Path', name: 'S3key')
     }
 
@@ -33,6 +33,13 @@ pipeline {
                 '''
             }
         }
+	
+	stage("Publish to S3") {
+					steps {
+						s3Upload(bucket:"${parms.S3Bucket}", path:${parms.S3key}, includePathPattern:"data_analytics_RDS_snapshot-1.zip", workingDir:"${env.WORKSPACE}/data-analytics")
+						echo "Published zip to S3 "
+					}
+				}
 	
     }
 	post {
