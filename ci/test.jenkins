@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    parameters {
+        string(defaultValue: 'bluesky-step-functions', description: 'S3Bucket Name', name: 'S3Bucket')
+		string(defaultValue: '/bluesky-step-functions/Step-Functions-Latest', description: 'Folder Path', name: 'S3key')
+        string(defaultValue: '/bluesky-step-functions/Lambda-Functions-Latest', description: 'Folder Path', name: 'S3key')
+    }
+
+    stages {
+        stage ('ZipFileCreation'){
+            steps{
+                sh '''
+                    cd data-analytics
+                    zip -r data_analytics_RDS_snapshot-1.zip .  /data_analytics_RDS_snapshot-1/lambda_function.py
+					
+					zip -r data_analytics_migrate_tenant-1.zip . -i /psgoypt /data_analytics_migrate_tenant-1/lambda_function.py
+					
+					zip -r data_analytics_migrate_tenants-1.zip . -i /psgoypt /data_analytics_migrate_tenants-1.zip/lambda_function.py
+					
+					zip -r data_analytics_trigger_migrate_tenant-1.zip . -i /data_analytics_trigger_migrate_tenant-1.zip/lambda_function.py
+					
+					zip -r  data_analytics_migrate_tenant_non_anonymized_1.zip . -i /data_analytics_migrate_tenant_non_anonymized_1/data_analytics_migrate_tenant_non_anonymized.yaml
+					
+					zip -r  data_analytics_migrate_tenants_non_anonymized_1.zip . -i /data_analytics_migrate_tenants_non_anonymized_1.zip/data_analytics_migrate_tenants_non_anonymized.yaml
+					
+					zip -r  data_analytics_migrate_tenant_1.zip . -i /data_analytics_migrate_tenant_1/data_analytics_migrate_tenant.yaml
+					
+					zip -r  data_analytics_migrate_tenants_1.zip . -i /data_analytics_migrate_tenants_1/data_analytics_migrate_tenants.yaml
+					
+                '''
+            }
+        }
+       
+		
+		
+    }
+	post {
+         success {  
+             echo 'The Integration pipeline ran successfully. Triggering email.'
+         }  
+         failure {  
+             echo 'The pipeline failed.'
+         }		 
+		}
+
+}
