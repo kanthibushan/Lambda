@@ -1,8 +1,8 @@
 pipeline {
     agent any
     parameters {
-        string(defaultValue: 'bluesky-step-functions', description: 'S3Bucket Name', name: 'S3Bucket')
-        string(defaultValue: '/bluesky-step-functions/Lambda-Functions-Latest', description: 'Folder Path', name: 'S3key')
+        string(defaultValue: 'cf-templates-1nm8d7zv1298-ap-northeast-1', description: 'S3Bucket Name', name: 'S3Bucket')
+        string(defaultValue: 'test/', description: 'Folder Path', name: 'S3key')
     }
 
     stages {
@@ -35,7 +35,7 @@ pipeline {
 	
 	stage("Publish to S3") {
 					steps {
-						s3Upload(bucket:${parms.S3Bucket}, path:${parms.S3key}, includePathPattern:"data_analytics_RDS_snapshot-1.zip", workingDir:"${env.WORKSPACE}/data-analytics")
+						s3Upload(bucket:"${parms.S3Bucket}", path:"${parms.S3key}", includePathPattern:"data_analytics_RDS_snapshot-1.zip", workingDir:"${env.WORKSPACE}/data-analytics")
 						echo "Published zip to S3 "
 					}
 				}
