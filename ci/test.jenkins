@@ -12,22 +12,14 @@ pipeline {
                 sh '''
                     cd data-analytics
 		    rm -rf data_analytics_RDS_snapshot-1.zip
-                    zip data_analytics_RDS_snapshot-1.zip test.py
-		    zip -ur data_analytics_RDS_snapshot-1.zip pgysog
+                    zip data_analytics_RDS_snapshot-1.zip lambda-functions\test.py
+		    zip -ur data_analytics_RDS_snapshot-1.zip bin\pgysog
 					
 					
                 '''
             }
         }
-       
-       stage("Publish to S3") {
-					steps {
-						s3Upload(bucket:"cf-templates-1nm8d7zv1298-ap-northeast-1", path:'test/', includePathPattern:"data_analytics_RDS_snapshot-1.zip", workingDir:"${env.WORKSPACE}/data-analytics")
-						echo "Published zip to S3 "
-					}
-				}
-		
-		
+	
     }
 	post {
          success {  
