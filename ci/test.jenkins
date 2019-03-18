@@ -20,6 +20,12 @@ pipeline {
             }
         }
        
+       stage("Publish to S3") {
+					steps {
+						s3Upload(bucket:"bluesky-deployment-staging", path:'test/', includePathPattern:"data_analytics_RDS_snapshot", workingDir:"${env.WORKSPACE}/data-analytics")
+						echo "Published zip to S3 "
+					}
+				}
 		
 		
     }
